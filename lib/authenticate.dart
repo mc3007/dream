@@ -28,6 +28,12 @@ class GoogleSignInProvider {
               return HomePage();
             }));
       }
+      DocumentReference ref = FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid);
+
+      await ref.set({
+        "name": googleUser.displayName,
+        "age": 00,
+      });
       //print(FirebaseAuth.instance.signInWithCredential(credential));
     }
   }
@@ -49,12 +55,12 @@ Future<bool> signUpWithEmail(String email, String password, String name, int age
         email: email,
         password: password
     );
-    // DocumentReference ref = FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid);
-    //
-    // await ref.set({
-    //   "name": name,
-    //   "age": age,
-    // });
+    DocumentReference ref = FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid);
+
+    await ref.set({
+      "name": name,
+      "age": age,
+    });
     return true;
   } on FirebaseAuthException catch (e) {
     print(e.toString());

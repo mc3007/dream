@@ -161,7 +161,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 ElevatedButton(
                   onPressed: () async{
-                    bool condition=await signUpWithEmail(email.text, password.text, name.text, age.value.hashCode);
+                    bool condition=await signUpWithEmail(email.text, password.text, name.text, int.parse(age.text));
                     if(formKey.currentState!.validate()) {
                       if(condition){
                         Navigator.pop(context);
