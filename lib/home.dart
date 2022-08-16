@@ -15,27 +15,39 @@ class _HomePageState extends State<HomePage> {
 
   DocumentReference ref = FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser!.uid);
   String name = "no name";
-  String age = "no age";
+  int age = 00;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("DREAM"),
+        centerTitle: true,
+      ),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              FutureBuilder(
-                future: readData(),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.yellowAccent
+                ),
+                padding: const EdgeInsets.all(10),
+                child: FutureBuilder(
+                  future: readData(),
                   builder: (context, snapshot){
-                     return Column(
-                       children: <Widget>[
-                         Text(name),
-                         Text(age)
-                       ],
-                     );
+                    return Column(
+                      children: <Widget>[
+                        const Text("Welcome", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50),),
+                        Text(name),
+                        Text(age.toString())
+                      ],
+                    );
                     //return  const CircularProgressIndicator();
                   },
-              )
+                ),
+              ),
             ],
           ),
         ),
